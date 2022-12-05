@@ -1,0 +1,34 @@
+name: update Readme.md content
+run-name: '${{ github.actor }} is testing out HW_Task_4'
+'on':
+  push: null
+jobs:
+  HW_Task_4:
+    runs-on: ubuntu-latest
+    env:
+      EMAIL: sotirov.sasho@gmail.com
+      # `GH_PAT` is a secret that contains remote repo PAT
+    steps:
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v3
+        with:
+          path: main
+      - name: Checkout Remote Repo
+        uses: actions/checkout@v3
+        with:
+          repository: bosch-ecs-career-camp/homework3-sashosotirov
+          path: remoterepo
+          token: ${{ secrets.GH_PAT }}
+      - run: echo " The repositories have been cloned to the runner."
+      - name: Update README.md file
+        run: |
+          cat ${{ github.workspace }}/remoterepo/README.md >> main/README.md
+                              
+      - name: Push changes
+        run: |
+          cd ${{ github.workspace }}/main
+          git config user.name ${{ github.actor }}
+          git config user.email ${{ env.EMAIL }}
+          git add .
+          git commit -m "Automatic Readme file update"
+          git push
