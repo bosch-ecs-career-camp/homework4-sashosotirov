@@ -36,7 +36,7 @@ async function run() {
             message: 'automatic file update',
             committer: {
             name: context.actor,
-            email: 'octocat@github.com'
+            email: 'sotirov.sasho@gmail.com'
             },
             content: content,
             sha: sha
