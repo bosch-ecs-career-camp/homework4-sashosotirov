@@ -23,5 +23,3 @@ Add your custom parameter similar to `who-to-greet` and print it to the console 
 3. Commit your changes
 4. PR will be opened automatically
 5. Wait for @ZdravkoChiflishki Review.
-
-add new tets task
