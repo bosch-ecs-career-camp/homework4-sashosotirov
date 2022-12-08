@@ -1,0 +1,39 @@
+
+# triger workflow event
+on: 
+  push:
+    
+jobs:
+  update-files:
+    runs-on: ubuntu-20.04  #runner
+    name: Update file content
+    steps:
+        #This action checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
+      - name: Checkout
+        uses: actions/checkout@v3 
+
+        #Downloading and caching distribution of the requested Node.js version, and adding it to the PATH
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Building action
+        run: npm run build
+      
+        
+      - name: update files
+        id: update
+        uses: ./
+        with:
+          remote-repo: homework3-sashosotirov
+          remote-owner: bosch-ecs-career-camp
+          remote-file: README.md
+          current-file: README.md
+          remoteToken: ${{ secrets.GH_PAT }}
+          currentToken: ${{ secrets.GITHUB_TOKEN }}
+          
+      

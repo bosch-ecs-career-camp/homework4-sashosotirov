@@ -1,0 +1,32 @@
+name: myCustomAction
+description: 'update file content'
+
+inputs:
+
+  remote-owner:
+    description: remote owner
+    
+  remote-repo:
+    description: remote repository
+    
+  remote-file:
+    description: remote file to copy content
+    required: true
+    default: README.md
+
+  current-file:
+    description: current file to update content
+    required: true
+    default: README.md
+
+  remoteToken:
+    description: The PAT access token
+    required: true
+
+  currentToken:
+    description: atomatic generated GUTHUB_TOKEN
+    required: true
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
